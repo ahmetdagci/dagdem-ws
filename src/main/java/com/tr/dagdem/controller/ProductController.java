@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tr.dagdem.model.Product;
-import com.tr.dagdem.model.Sale;
+import com.tr.dagdem.wsmodel.Product;
+import com.tr.dagdem.wsmodel.Sale;
 
 @RestController
 public class ProductController {
