@@ -2,8 +2,6 @@ package com.tr.dagdem.service.dealer;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -31,8 +29,4 @@ public class DealerServiceImpl extends BaseServisImpl implements DealerService{
 		return dealerDAO;
 	}
 
-//	@Resource(name="dealerDAO")
-//	public void setDealerDAO(DealerDAO dealerDAO) {
-//		this.dealerDAO = dealerDAO;
-//	}
 }

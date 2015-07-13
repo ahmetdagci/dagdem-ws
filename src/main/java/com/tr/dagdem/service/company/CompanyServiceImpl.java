@@ -5,8 +5,6 @@ import java.math.RoundingMode;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -86,15 +84,5 @@ public class CompanyServiceImpl extends BaseServisImpl implements CompanyService
 	{
 		return companyDAO;
 	}
-	
-//	@Resource(name="companyDAO")
-//	public void setCompanyDAO(CompanyDAO companyDAO) {
-//		this.companyDAO = companyDAO;
-//	}
-//	
-//	@Resource(name="productDAO")
-//	public void setProductDAO(ProductDAO productDAO) {
-//		this.productDAO = productDAO;
-//	}
 	
 }

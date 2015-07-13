@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -86,9 +84,4 @@ public class SaleReportServiceImpl extends BaseServisImpl implements SaleReportS
 		return saleReportDAO;
 	}
 	
-//	@Resource(name="saleReportDAO")
-//	public void setSaleReportDAO(SaleReportDAO saleReportDAO) {
-//		this.saleReportDAO = saleReportDAO;
-//	}
-
 }

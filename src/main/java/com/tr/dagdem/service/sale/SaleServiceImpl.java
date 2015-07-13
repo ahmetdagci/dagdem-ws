@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -73,14 +71,4 @@ public class SaleServiceImpl extends BaseServisImpl implements SaleService{
 	protected GenericDAO getDAO() {
 		return null;
 	}
-	
-//	@Resource(name="saleDAO")
-//	public void setSaleDAO(SaleDAO saleDAO) {
-//		this.saleDAO = saleDAO;
-//	}
-//	
-//	@Resource(name="saleCreationHelper")
-//	public void setSaleCreationHelper(SaleCreationHelper saleCreationHelper) {
-//		this.saleCreationHelper = saleCreationHelper;
-//	}
 }
