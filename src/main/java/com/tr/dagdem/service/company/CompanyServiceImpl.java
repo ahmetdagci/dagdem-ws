@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +26,10 @@ import com.tr.dagdem.service.BaseServisImpl;
 @Qualifier("companyService")
 public class CompanyServiceImpl extends BaseServisImpl implements CompanyService{
 	
+	@Autowired
 	private CompanyDAO companyDAO;
 	
+	@Autowired
 	private ProductDAO productDAO;
 	
 	public void firmaGuncelle(FirmaTanimTable firma)
@@ -84,14 +87,14 @@ public class CompanyServiceImpl extends BaseServisImpl implements CompanyService
 		return companyDAO;
 	}
 	
-	@Resource(name="companyDAO")
-	public void setCompanyDAO(CompanyDAO companyDAO) {
-		this.companyDAO = companyDAO;
-	}
-	
-	@Resource(name="productDAO")
-	public void setProductDAO(ProductDAO productDAO) {
-		this.productDAO = productDAO;
-	}
+//	@Resource(name="companyDAO")
+//	public void setCompanyDAO(CompanyDAO companyDAO) {
+//		this.companyDAO = companyDAO;
+//	}
+//	
+//	@Resource(name="productDAO")
+//	public void setProductDAO(ProductDAO productDAO) {
+//		this.productDAO = productDAO;
+//	}
 	
 }

@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,10 @@ import com.tr.dagdem.service.util.SatisTakipException;
 @Qualifier("saleService")
 public class SaleServiceImpl extends BaseServisImpl implements SaleService{
 	
+	@Autowired
 	private SaleCreationHelper saleCreationHelper;
+	
+	@Autowired
 	private SaleDAO saleDAO;
 	
 	public void satisiGerceklestir(SaticiTanimTable satici,Date satisTarihi) 
@@ -70,13 +74,13 @@ public class SaleServiceImpl extends BaseServisImpl implements SaleService{
 		return null;
 	}
 	
-	@Resource(name="saleDAO")
-	public void setSaleDAO(SaleDAO saleDAO) {
-		this.saleDAO = saleDAO;
-	}
-	
-	@Resource(name="saleCreationHelper")
-	public void setSaleCreationHelper(SaleCreationHelper saleCreationHelper) {
-		this.saleCreationHelper = saleCreationHelper;
-	}
+//	@Resource(name="saleDAO")
+//	public void setSaleDAO(SaleDAO saleDAO) {
+//		this.saleDAO = saleDAO;
+//	}
+//	
+//	@Resource(name="saleCreationHelper")
+//	public void setSaleCreationHelper(SaleCreationHelper saleCreationHelper) {
+//		this.saleCreationHelper = saleCreationHelper;
+//	}
 }

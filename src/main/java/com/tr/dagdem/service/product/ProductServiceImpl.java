@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import com.tr.dagdem.model.stock.UrunStockTable;
 @Qualifier("productService")
 public class ProductServiceImpl implements ProductService {
 
+	@Autowired
 	private ProductDAO productDAO;
 	
 	public List<UrunTanimTable> urunleriGetir()
@@ -43,8 +45,8 @@ public class ProductServiceImpl implements ProductService {
 		productDAO.saveOrUpdate(urunStock);
 	}
 	
-	@Resource(name="productDAO")
-	public void setProductDAO(ProductDAO productDAO) {
-		this.productDAO = productDAO;
-	}
+//	@Resource(name="productDAO")
+//	public void setProductDAO(ProductDAO productDAO) {
+//		this.productDAO = productDAO;
+//	}
 }

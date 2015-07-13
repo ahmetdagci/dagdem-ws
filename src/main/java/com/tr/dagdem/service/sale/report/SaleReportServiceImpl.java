@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tr.dagdem.dao.GenericDAO;
@@ -18,6 +19,7 @@ import com.tr.dagdem.service.BaseServisImpl;
 @Service("saleReportService")
 public class SaleReportServiceImpl extends BaseServisImpl implements SaleReportService{
 	
+	@Autowired
 	private SaleReportDAO saleReportDAO;
 	
 	public List<SatisRaporu> saticiBazliYapilanSatislariGetir(Date baslamaTarihi,Date bitisTarihi)
@@ -84,9 +86,9 @@ public class SaleReportServiceImpl extends BaseServisImpl implements SaleReportS
 		return saleReportDAO;
 	}
 	
-	@Resource(name="saleReportDAO")
-	public void setSaleReportDAO(SaleReportDAO saleReportDAO) {
-		this.saleReportDAO = saleReportDAO;
-	}
+//	@Resource(name="saleReportDAO")
+//	public void setSaleReportDAO(SaleReportDAO saleReportDAO) {
+//		this.saleReportDAO = saleReportDAO;
+//	}
 
 }

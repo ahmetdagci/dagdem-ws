@@ -15,7 +15,7 @@ import com.tr.dagdem.model.stock.UrunStockTable;
 
 @Repository
 @Qualifier("companyDAO")
-public class CompanyDAOImpl extends GenericDAOImpl implements CompanyDAO{
+public class CompanyDAOImpl extends GenericDAOImpl implements CompanyDAO {
 
 	public void firmaKaydet(FirmaTanimTable firma)
 	{

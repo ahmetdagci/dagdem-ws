@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import com.tr.dagdem.service.BaseServisImpl;
 @Qualifier("customerService")
 public class CustomerServiceImpl extends BaseServisImpl implements CustomerService{
 	
+	@Autowired
 	private CustomerDAO customerDAO;
 	
 	public List<MusteriTanimTable> musterileriGetir()
@@ -41,8 +43,8 @@ public class CustomerServiceImpl extends BaseServisImpl implements CustomerServi
 		return customerDAO;
 	}
 	
-	@Resource(name="customerDAO")
-	public void setCustomerDAO(CustomerDAO customerDAO) {
-		this.customerDAO = customerDAO;
-	}
+//	@Resource(name="customerDAO")
+//	public void setCustomerDAO(CustomerDAO customerDAO) {
+//		this.customerDAO = customerDAO;
+//	}
 }

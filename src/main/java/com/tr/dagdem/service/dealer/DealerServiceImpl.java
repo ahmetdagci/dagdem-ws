@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import com.tr.dagdem.service.BaseServisImpl;
 @Qualifier("dealerService")
 public class DealerServiceImpl extends BaseServisImpl implements DealerService{
 
+	@Autowired
 	private DealerDAO dealerDAO;
 	
 	public List<SaticiTanimTable> saticilariGetir() 
@@ -29,8 +31,8 @@ public class DealerServiceImpl extends BaseServisImpl implements DealerService{
 		return dealerDAO;
 	}
 
-	@Resource(name="dealerDAO")
-	public void setDealerDAO(DealerDAO dealerDAO) {
-		this.dealerDAO = dealerDAO;
-	}
+//	@Resource(name="dealerDAO")
+//	public void setDealerDAO(DealerDAO dealerDAO) {
+//		this.dealerDAO = dealerDAO;
+//	}
 }

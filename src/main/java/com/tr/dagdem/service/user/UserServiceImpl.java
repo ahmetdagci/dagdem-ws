@@ -2,6 +2,7 @@ package com.tr.dagdem.service.user;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import com.tr.dagdem.service.BaseServisImpl;
 @Qualifier("userService")
 public class UserServiceImpl extends BaseServisImpl implements UserService {
 	
+	@Autowired
 	private UserDAO userDAO;
 	
 	public KullaniciTable kullaniciSorgula(String kullanici, String password) 
@@ -27,9 +29,9 @@ public class UserServiceImpl extends BaseServisImpl implements UserService {
 		return userDAO;
 	}
 
-	@Resource(name="userDAO")
-	public void setUserDAO(UserDAO userDAO) {
-		this.userDAO = userDAO;
-	}
+//	@Resource(name="userDAO")
+//	public void setUserDAO(UserDAO userDAO) {
+//		this.userDAO = userDAO;
+//	}
 	
 }

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import com.tr.dagdem.service.BaseServisImpl;
 @Qualifier("revenueService")
 public class RevenueServiceImpl extends BaseServisImpl implements RevenueService {
 	
+	@Autowired
 	private RevenueDAO revenueDAO;
 	
 	public void tahsilatKaydet(TahsilatTable tahsilatTable) 
@@ -38,8 +40,8 @@ public class RevenueServiceImpl extends BaseServisImpl implements RevenueService
 		return revenueDAO;
 	}
 	
-	@Resource(name="revenueDAO")
-	public void setRevenueDAO(RevenueDAO revenueDAO) {
-		this.revenueDAO = revenueDAO;
-	}
+//	@Resource(name="revenueDAO")
+//	public void setRevenueDAO(RevenueDAO revenueDAO) {
+//		this.revenueDAO = revenueDAO;
+//	}
 }

@@ -58,14 +58,19 @@
 			<version>5.0.1.Final</version>
 		</dependency>
 		        
- 
+		 <dependency>
+		    <groupId>commons-dbcp</groupId>
+		    <artifactId>commons-dbcp</artifactId>
+		    <version>1.2.2</version>
+		</dependency>
+
         <!-- MySQL -->
-       <!--  <dependency>
+  		<dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
         </dependency>
-  -->
+  
         <!-- Joda-Time -->
         <!-- <dependency>
             <groupId>joda-time</groupId>
@@ -92,7 +97,7 @@
 			<version>18.0</version>
 		</dependency>
 			 	
-			 	
+<!-- 			 	
 		<dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -109,7 +114,7 @@
             <artifactId>javax.servlet.jsp-api</artifactId>
             <version>2.3.1</version>
         </dependency>
- 
+ --> 
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
@@ -119,14 +124,59 @@
     </dependencies>
 
     <properties>
+    	<final.name>dagdem-ws</final.name>
         <springframework.version>4.0.6.RELEASE</springframework.version>
         <hibernate.version>4.3.6.Final</hibernate.version>
         <mysql.version>5.1.31</mysql.version>
         <joda-time.version>2.3</joda-time.version>
+        
+        
+        <hibernate.dialect>org.hibernate.dialect.MySQLDialect</hibernate.dialect>
+		<jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
+		<jdbc.url><![CDATA[jdbc:mysql://localhost:3306/satistakip]]></jdbc.url>
+		<jdbc.username>root</jdbc.username>
+		<jdbc.password>ahmet12345</jdbc.password>
+		
+		<deploy.level>dev</deploy.level>
+		<log.level>debug</log.level>
+		<enable.debug>true</enable.debug>
+		<enable.statistics>true</enable.statistics>
+		<hibernate.show_sql>false</hibernate.show_sql>
+		<format_sql>false</format_sql>
     </properties>
 
 
     <build>
+    <finalName>${final.name}</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>*.xml</include>
+					<include>**/*.xml</include>
+					<include>*.wsdl</include>
+					<include>**/*.wsdl</include>
+					<include>*.properties</include>
+					<include>**/*.properties</include>
+					<include>*.txt</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>*.xml</exclude>
+					<exclude>**/*.xml</exclude>
+					<exclude>*.wsdl</exclude>
+					<exclude>**/*.wsdl</exclude>
+					<exclude>*.properties</exclude>
+					<exclude>**/*.properties</exclude>
+					<exclude>*.txt</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		
         <plugins>
 	        <plugin>
 				<groupId>org.codehaus.mojo</groupId>
