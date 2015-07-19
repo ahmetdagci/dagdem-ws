@@ -3,8 +3,10 @@ package com.tr.dagdem.wsmodel;
 public class Customer {
 	
 	private String customerId;
+	private String customerNo;
 	private String name;
 	private String lastName;
+	private String gsmNo;
 	private Address address;
 	
 	public Customer() {
@@ -39,6 +41,26 @@ public class Customer {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	
+	public String getCustomerNo()
+	{
+		return customerNo;
+	}
+	
+	public void setCustomerNo(String customerNo)
+	{
+		this.customerNo = customerNo;
+	}
+	
+	public String getGsmNo()
+	{
+		return gsmNo;
+	}
+	
+	public void setGsmNo(String gsmNo)
+	{
+		this.gsmNo = gsmNo;
 	}
 
 	public Address getAddress() {

@@ -5,6 +5,7 @@ import java.util.List;
 import com.tr.dagdem.model.product.UrunTanimTable;
 import com.tr.dagdem.model.stock.UrunStockRaporu;
 import com.tr.dagdem.model.stock.UrunStockTable;
+import com.tr.dagdem.wsmodel.Product;
 
 public interface ProductService {
 
@@ -17,4 +18,7 @@ public interface ProductService {
 	public List<UrunStockRaporu> stoktakiUrunleriFirmaUrunAdiVeMiktarBilgileriyleGetir(Long firmaId);
 	
 	public void stogaUrunEkle(UrunStockTable urunStock);
+	
+	public List<Product> getProducts(String productType);
+	
 }

@@ -28,6 +28,7 @@ public class MusteriTanimTable implements Serializable{
 	private boolean aktif;
 	private Long gsm;
 	private Date tarih;
+	private Date guncellemeTarihi;
 	private boolean yeniMusteri = false;
 	private String musteriNo;
 	
@@ -93,6 +94,16 @@ public class MusteriTanimTable implements Serializable{
 
 	public void setTarih(Date tarih) {
 		this.tarih = tarih;
+	}
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "GUNCELLEME_TARIHI", length = 7)
+	public Date getGuncellemeTarihi() {
+		return this.guncellemeTarihi;
+	}
+
+	public void setGuncellemeTarihi(Date guncellemeTarihi) {
+		this.guncellemeTarihi = guncellemeTarihi;
 	}
 	
 	@Column(name="AKTIF")

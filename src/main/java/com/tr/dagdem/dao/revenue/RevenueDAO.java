@@ -8,5 +8,9 @@ public interface RevenueDAO extends GenericDAO
 {
 	public BigDecimal musteridenYapilanTahsilatTutariSorgula(long musteriKodu);
 	
-	public BigDecimal musteriBorcuSorgula(long musteriKodu);
+	public BigDecimal musteriyeYapilanSatisSorgula(long musteriKodu);
+	
+	public BigDecimal tumMusterilereYapilanSatisTutari();
+	
+	public BigDecimal tumMusterilerdenYapilanTahsilatTutariSorgula();
 }

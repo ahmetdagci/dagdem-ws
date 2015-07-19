@@ -21,8 +21,8 @@ public class RevenueDAOImpl extends GenericDAOImpl implements RevenueDAO{
 		}
 		return musteriToplamOdemeTutari;
 	}
-	
-	public BigDecimal musteriBorcuSorgula(long musteriKodu)
+
+	public BigDecimal musteriyeYapilanSatisSorgula(long musteriKodu)
 	{
 		BigDecimal toplamBorcTutari = (BigDecimal)getSession().createQuery("select sum(tutar) from MusteriSatisTable musteriSatis where musteriSatis.etkin=true and musteriSatis.musteriKodu=:musteriKodu")
 		.setParameter("musteriKodu", musteriKodu)
@@ -33,4 +33,29 @@ public class RevenueDAOImpl extends GenericDAOImpl implements RevenueDAO{
 		}
 		return toplamBorcTutari.setScale(2, BigDecimal.ROUND_HALF_UP);
 	}
+
+	
+	public BigDecimal tumMusterilerdenYapilanTahsilatTutariSorgula()
+	{	
+		BigDecimal musteriToplamOdemeTutari = (BigDecimal)getSession().createQuery("select sum(tahsilat.tutar) from TahsilatTable tahsilat");
+		if(musteriToplamOdemeTutari==null)
+		{
+			musteriToplamOdemeTutari = BigDecimal.ZERO;
+		}
+		return musteriToplamOdemeTutari.setScale(2, BigDecimal.ROUND_HALF_UP);
+	}
+	
+	
+	public BigDecimal tumMusterilereYapilanSatisTutari()
+	{
+		BigDecimal toplamBorcTutari = (BigDecimal)getSession().createQuery("select sum(tutar) from MusteriSatisTable musteriSatis where musteriSatis.etkin=true").uniqueResult();
+		if(toplamBorcTutari==null)
+		{
+			toplamBorcTutari = BigDecimal.ZERO;
+		}
+		return toplamBorcTutari.setScale(2, BigDecimal.ROUND_HALF_UP);
+	}
+	
+
+	
 }
