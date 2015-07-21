@@ -38,7 +38,7 @@
 					${format_sql}
 				</prop>
 				<prop key="hibernate.hbm2ddl.auto">
-					
+					${hibernate.hbm2ddl.auto}
 				</prop>
 				<!-- <prop key="hibernate.transaction.flush_before_completion">
   					true

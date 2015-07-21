@@ -120,8 +120,29 @@
             <artifactId>jackson-mapper-asl</artifactId>
             <version>1.9.13</version>
         </dependency>
+        
+        <dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.187</version>
+		</dependency>
+        
  	
     </dependencies>
+    
+	<profiles>
+		<profile>
+			<id>h2db</id>
+			<properties>
+				<hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
+				<jdbc.driverClassName>org.h2.Driver</jdbc.driverClassName>
+				<jdbc.url><![CDATA[jdbc:h2:tcp://localhost/~/satistakip;MODE=MySQL]]></jdbc.url>
+				<jdbc.username>sa</jdbc.username>
+				<jdbc.password></jdbc.password>
+				<hibernate.hbm2ddl.auto>create-drop</hibernate.hbm2ddl.auto>
+			</properties>
+		</profile>
+	</profiles>
 
     <properties>
     	<final.name>dagdem-ws</final.name>
@@ -137,6 +158,7 @@
 		<jdbc.username>root</jdbc.username>
 		<jdbc.password>ahmet12345</jdbc.password>
 		
+		<hibernate.hbm2ddl.auto></hibernate.hbm2ddl.auto>
 		<deploy.level>dev</deploy.level>
 		<log.level>debug</log.level>
 		<enable.debug>true</enable.debug>

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tr.dagdem.service.product.ProductService;
 import com.tr.dagdem.wsmodel.Product;
-import com.tr.dagdem.wsmodel.Sale;
 
 @RestController
 public class ProductController {
@@ -22,12 +21,5 @@ public class ProductController {
     {
 		return productService.getProducts(productType);
     }
-	
-	
-	@RequestMapping("/sale")
-	public int sellProducts(@RequestParam(value="sale") Sale sale)
-	{
-		return 0;
-	}
     
 }
