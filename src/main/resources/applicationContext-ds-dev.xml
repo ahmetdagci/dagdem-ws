@@ -14,6 +14,8 @@
                             http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
  
  	<tx:annotation-driven transaction-manager="transactionManager"/>
+    
+    <context:component-scan base-package="com.tr.dagdem" />
 	
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
@@ -21,6 +23,7 @@
 	 	
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="com.tr.dagdem.model" /> 
 		<property name="configLocations">
 			<list>
 				<value>classpath:hibernate.cfg.xml</value>
@@ -28,22 +31,17 @@
     	</property>
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">
-					${hibernate.dialect}
-				</prop>
-				<prop key="hibernate.show_sql">
-					${hibernate.show_sql}
-				</prop>
-				<prop key="hibernate.format_sql">
-					${format_sql}
-				</prop>
-				<prop key="hibernate.hbm2ddl.auto">
-					${hibernate.hbm2ddl.auto}
-				</prop>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
 				<!-- <prop key="hibernate.transaction.flush_before_completion">
   					true
   				</prop> -->
-				<prop key="hibernate.generate_statistics">${enable.statistics}</prop>
+				<!--<prop key="hibernate.default_schema">satistakip</prop>-->
+				<prop key="hibernate.transaction.flush_before_completion">true</prop>
+                <prop key="hibernate.connection.release_mode">after_transaction</prop>
+				
+				<prop key="hibernate.generate_statistics">true</prop>
   				<prop key="hibernate.connection.SetBigStringTryClob">true</prop>
   				<prop key="hibernate.jdbc.batch_size">0</prop>
 			</props>
@@ -54,8 +52,12 @@
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
-		<property name="defaultAutoCommit" value="false" />		
+		<property name="password" value="simone12345" />
+		<property name="initialSize" value="1"/>
+        <property name="maxTotal" value="100"/>
+        <property name="maxWaitMillis" value="10000"/>
+        <property name="defaultAutoCommit" value="false"/>
+        <property name="accessToUnderlyingConnectionAllowed" value="true"/>		
 	</bean>
 	
 	

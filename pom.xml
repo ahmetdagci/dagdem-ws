@@ -57,13 +57,14 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.0.1.Final</version>
 		</dependency>
-		        
+		
+        
 		 <dependency>
 		    <groupId>org.apache.commons</groupId>
 		    <artifactId>commons-dbcp2</artifactId>
 		    <version>2.0</version>
 		</dependency>
-
+	
         <!-- MySQL -->
   		<dependency>
             <groupId>mysql</groupId>
@@ -124,10 +125,9 @@
         <dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>1.4.187</version>
+			<version>1.4.180</version>
 		</dependency>
-        
- 	
+ 		
     </dependencies>
     
 	<profiles>
@@ -142,8 +142,20 @@
 				<hibernate.hbm2ddl.auto>create-drop</hibernate.hbm2ddl.auto>
 			</properties>
 		</profile>
+	
+		<profile>
+			<id>mysql</id>
+			<properties>
+				<hibernate.dialect>org.hibernate.dialect.MySQLDialect</hibernate.dialect>
+				<jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
+				<jdbc.url><![CDATA[jdbc:mysql://localhost:3306/satistakip?zeroDateTimeBehavior=convertToNull]]></jdbc.url>
+				<jdbc.username>root</jdbc.username>
+				<jdbc.password>simone12345</jdbc.password>
+				<hibernate.hbm2ddl.auto>create-drop</hibernate.hbm2ddl.auto>
+			</properties>
+		</profile>
 	</profiles>
-
+	
     <properties>
     	<final.name>dagdem-ws</final.name>
         <springframework.version>4.0.6.RELEASE</springframework.version>
@@ -151,6 +163,7 @@
         <mysql.version>5.1.31</mysql.version>
         <joda-time.version>2.3</joda-time.version>
         
+		<commons-dbcp.version>1.4</commons-dbcp.version>
         
         <hibernate.dialect>org.hibernate.dialect.MySQLDialect</hibernate.dialect>
 		<jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
@@ -160,10 +173,10 @@
 		
 		<hibernate.hbm2ddl.auto></hibernate.hbm2ddl.auto>
 		<deploy.level>dev</deploy.level>
-		<log.level>debug</log.level>
+		<log.level>trace</log.level>
 		<enable.debug>true</enable.debug>
 		<enable.statistics>true</enable.statistics>
-		<hibernate.show_sql>false</hibernate.show_sql>
+		<hibernate.show_sql>true</hibernate.show_sql>
 		<format_sql>false</format_sql>
     </properties>
 
@@ -200,6 +213,34 @@
 		</resources>
 		
         <plugins>
+		
+		<plugin>
+			  <groupId>org.eclipse.jetty</groupId>
+			  <artifactId>jetty-maven-plugin</artifactId>
+			  <version>9.2.8.v20150217</version>
+		</plugin>
+
+		<plugin>
+			  <groupId>org.codehaus.mojo</groupId>
+			  <artifactId>exec-maven-plugin</artifactId>
+			  <version>1.2.1</version>
+			  <executions>
+				<execution>
+				  <goals>
+					<goal>java</goal>
+				  </goals>
+				</execution>
+			  </executions>
+			  <configuration>
+				<mainClass>com.tr.dagdem.util.ModelDBBuilder</mainClass>
+				<!--
+				<arguments>
+				  <argument>foo</argument>
+				  <argument>bar</argument>
+				</arguments>
+				-->
+			  </configuration>
+			</plugin>
 	        <plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>tomcat-maven-plugin</artifactId>
