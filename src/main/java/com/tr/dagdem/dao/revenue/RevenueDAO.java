@@ -6,9 +6,9 @@ import com.tr.dagdem.dao.GenericDAO;
 
 public interface RevenueDAO extends GenericDAO
 {
-	public BigDecimal musteridenYapilanTahsilatTutariSorgula(long musteriKodu);
+	public BigDecimal musteridenYapilanTahsilatTutariSorgula(long musteriId);
 	
-	public BigDecimal musteriyeYapilanSatisSorgula(long musteriKodu);
+	public BigDecimal musteriyeYapilanSatisSorgula(long musteriId);
 	
 	public BigDecimal tumMusterilereYapilanSatisTutari();
 	

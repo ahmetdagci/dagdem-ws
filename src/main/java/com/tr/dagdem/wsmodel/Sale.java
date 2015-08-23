@@ -1,12 +1,26 @@
 package com.tr.dagdem.wsmodel;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Sale {
+@SuppressWarnings("serial")
+public class Sale implements Serializable{
 	
 	private String userId;
 	private String customerId;
 	private List<Product> productList;
+	
+	public Sale()
+	{
+		
+	}
+	
+	public Sale(String userId,String customerId,List<Product> products)
+	{
+		this.userId = userId;
+		this.customerId = customerId;
+		this.productList = products;
+	}
 	
 	public String getCustomerId() {
 		return customerId;

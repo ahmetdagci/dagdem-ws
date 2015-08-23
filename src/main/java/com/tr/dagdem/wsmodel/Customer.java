@@ -1,6 +1,9 @@
 package com.tr.dagdem.wsmodel;
 
-public class Customer {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Customer implements Serializable{
 	
 	private String customerId;
 	private String customerNo;

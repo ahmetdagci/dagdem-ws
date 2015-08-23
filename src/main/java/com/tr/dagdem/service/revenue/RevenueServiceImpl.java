@@ -23,10 +23,11 @@ public class RevenueServiceImpl extends BaseServisImpl implements RevenueService
 	private RevenueDAO revenueDAO;
 	
 	@Transactional
-	public void tahsilatKaydet(Customer customer,BigDecimal paymentAmount)
+	public void tahsilatKaydet(Customer customer,String userCode,BigDecimal paymentAmount)
 	{
 		TahsilatTable tahsilatTable = new TahsilatTable();
-		tahsilatTable.setMusteriKodu(new Long(customer.getCustomerNo()));
+		tahsilatTable.setMusteriKodu(new Long(customer.getCustomerId()));
+		tahsilatTable.setKullanici(userCode);
 		tahsilatTable.setTarih(new Date());
 		tahsilatTable.setTutar(paymentAmount);
 		revenueDAO.saveOrUpdate(tahsilatTable);
@@ -47,19 +48,20 @@ public class RevenueServiceImpl extends BaseServisImpl implements RevenueService
 		return revenueDAO.tumMusterilerdenYapilanTahsilatTutariSorgula();
 	}
 	
-	public BigDecimal musteridenYapilanTahsilatTutariSorgula(long musteriKodu)
+	public BigDecimal musteridenYapilanTahsilatTutariSorgula(long customerId)
 	{
-		return revenueDAO.musteridenYapilanTahsilatTutariSorgula(musteriKodu);	
+		return revenueDAO.musteridenYapilanTahsilatTutariSorgula(customerId);	
 	}
 	
 	@Transactional
-	public BigDecimal musteriBorcuSorgula(long musteriKodu)
+	public BigDecimal musteriBorcuSorgula(long musteriId)
 	{
-		BigDecimal musteriyeYapilanSatisTutari = revenueDAO.musteriyeYapilanSatisSorgula(musteriKodu);
-		BigDecimal musteridenYapilanTahsilatTutari = revenueDAO.musteridenYapilanTahsilatTutariSorgula(musteriKodu);
+		BigDecimal musteriyeYapilanSatisTutari = revenueDAO.musteriyeYapilanSatisSorgula(musteriId);
+		BigDecimal musteridenYapilanTahsilatTutari = revenueDAO.musteridenYapilanTahsilatTutariSorgula(musteriId);
 		return musteriyeYapilanSatisTutari.subtract(musteridenYapilanTahsilatTutari);
 	}
 	
+	@Transactional
 	public CustomerTrafficReport getCustomerTrafficReport(Long musteriKodu)
 	{
 		BigDecimal musteriyeYapilanSatisTutari = revenueDAO.musteriyeYapilanSatisSorgula(musteriKodu);

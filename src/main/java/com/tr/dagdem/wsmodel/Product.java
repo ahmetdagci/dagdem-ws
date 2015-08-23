@@ -1,6 +1,9 @@
 package com.tr.dagdem.wsmodel;
 
-public class Product {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Product implements Serializable{
 	
 	private String id;
 	private String productName;

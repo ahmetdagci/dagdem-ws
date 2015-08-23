@@ -1,12 +1,19 @@
 package com.tr.dagdem.wsmodel;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class CustomerTrafficReport {
+@SuppressWarnings("serial")
+public class CustomerTrafficReport implements Serializable{
 	
 	private Long customerNo;
 	private BigDecimal totalPaymentAmount;
 	private BigDecimal totalSaleAmount;
+	
+	public CustomerTrafficReport()
+	{
+		
+	}
 	
 	public CustomerTrafficReport(Long customerNo,BigDecimal totalPaymentAmount,BigDecimal totalSaleAmount)
 	{

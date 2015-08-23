@@ -11,10 +11,10 @@ import com.tr.dagdem.dao.GenericDAOImpl;
 @Qualifier("revenueDAO")
 public class RevenueDAOImpl extends GenericDAOImpl implements RevenueDAO{
 
-	public BigDecimal musteridenYapilanTahsilatTutariSorgula(long musteriKodu)
+	public BigDecimal musteridenYapilanTahsilatTutariSorgula(long musteriId)
 	{	
-		BigDecimal musteriToplamOdemeTutari = (BigDecimal)getSession().createQuery("select sum(tahsilat.tutar) from TahsilatTable tahsilat where tahsilat.musteriKodu=:musteriKodu")
-		.setParameter("musteriKodu", musteriKodu).uniqueResult();
+		BigDecimal musteriToplamOdemeTutari = (BigDecimal)getSession().createQuery("select sum(tahsilat.tutar) from TahsilatTable tahsilat where tahsilat.musteriKodu=:musteriId")
+		.setParameter("musteriId", musteriId).uniqueResult();
 		if(musteriToplamOdemeTutari==null)
 		{
 			musteriToplamOdemeTutari = BigDecimal.ZERO;
@@ -22,10 +22,10 @@ public class RevenueDAOImpl extends GenericDAOImpl implements RevenueDAO{
 		return musteriToplamOdemeTutari;
 	}
 
-	public BigDecimal musteriyeYapilanSatisSorgula(long musteriKodu)
+	public BigDecimal musteriyeYapilanSatisSorgula(long musteriId)
 	{
-		BigDecimal toplamBorcTutari = (BigDecimal)getSession().createQuery("select sum(tutar) from MusteriSatisTable musteriSatis where musteriSatis.etkin=true and musteriSatis.musteriKodu=:musteriKodu")
-		.setParameter("musteriKodu", musteriKodu)
+		BigDecimal toplamBorcTutari = (BigDecimal)getSession().createQuery("select sum(tutar) from MusteriSatisTable musteriSatis where musteriSatis.etkin=true and musteriSatis.musteriKodu=:musteriId")
+		.setParameter("musteriId", musteriId)
 		.uniqueResult();
 		if(toplamBorcTutari==null)
 		{

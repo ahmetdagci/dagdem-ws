@@ -8,7 +8,7 @@ import com.tr.dagdem.wsmodel.CustomerTrafficReport;
 
 public interface RevenueService {
 	
-	public void tahsilatKaydet(Customer customer,BigDecimal paymentAmount);
+	public void tahsilatKaydet(Customer customer,String userCode,BigDecimal paymentAmount);
 	
 	public void tahsilatKaydet(TahsilatTable tahsilatTable);
 	
@@ -16,9 +16,9 @@ public interface RevenueService {
 	
 	public BigDecimal tumMusterilereYapilanSatisTutari();
 	
-	public BigDecimal musteridenYapilanTahsilatTutariSorgula(long musteriKodu);
+	public BigDecimal musteridenYapilanTahsilatTutariSorgula(long customerId);
 	
-	public BigDecimal musteriBorcuSorgula(long musteriKodu);
+	public BigDecimal musteriBorcuSorgula(long musteriId);
 	
 	public CustomerTrafficReport getCustomerTrafficReport(Long customerNo);
 

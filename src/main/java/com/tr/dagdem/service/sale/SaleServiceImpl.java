@@ -46,7 +46,7 @@ public class SaleServiceImpl extends BaseServisImpl implements SaleService{
 		{
 			SatisTable satisTable = new SatisTable();
 			satisTable.setSaticiKodu(new Long(sale.getUserId()));
-			UrunTanimTable urunTanimTable = productDAO.findById(UrunTanimTable.class, product.getId());
+			UrunTanimTable urunTanimTable = productDAO.findById(UrunTanimTable.class, Integer.parseInt(product.getId()));
 			satisTable.setUrunKodu(urunTanimTable.getUrunKodu());
 			satisTable.setAdet(product.getQuantity());
 			satisTable.setSatisTarihi(new Date());
