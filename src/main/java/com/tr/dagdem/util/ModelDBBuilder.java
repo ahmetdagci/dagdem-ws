@@ -1,12 +1,12 @@
 package com.tr.dagdem.util;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.sql.*;
-import java.text.MessageFormat;
-import java.util.List;
-import java.util.Properties;
 
 public class ModelDBBuilder
 {
@@ -14,19 +14,8 @@ public class ModelDBBuilder
     public static void main(String[] args) throws Exception
     {
         
-       // ApplicationContext applicationContext = new ClassPathXmlApplicationContext(new String[] {"applicationContext-ds-dev.xml"});
-	   
-	    try {
-//            readData();
-            Connection h2Connection = getH2Connection();
-            System.out.println(h2Connection.toString());
-
-        } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-        
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(new String[] {"applicationContext-ds-prod.xml"});
+        System.out.println("sadasdas");
     }
 	
 	public static Connection getH2Connection() throws SQLException,ClassNotFoundException {

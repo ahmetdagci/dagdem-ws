@@ -1,5 +1,6 @@
 package com.tr.dagdem.service.sale;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tr.dagdem.dao.GenericDAO;
+import com.tr.dagdem.dao.customer.CustomerDAO;
 import com.tr.dagdem.dao.product.ProductDAO;
 import com.tr.dagdem.dao.sale.SaleDAO;
 import com.tr.dagdem.model.customer.MusteriTanimTable;
@@ -38,21 +40,29 @@ public class SaleServiceImpl extends BaseServisImpl implements SaleService{
 	@Autowired
 	private ProductDAO productDAO;
 	
+	@Autowired
+	private CustomerDAO customerDAO;
+	
 	@Transactional
 	public void satisiGerceklestir(Sale sale)
 	{
-		Set<SatisTable> satisTableSeti = new HashSet<SatisTable>(0);
+		Set<MusteriSatisTable> satisTableSeti = new HashSet<MusteriSatisTable>(0);
+		MusteriTanimTable customer = customerDAO.findById(MusteriTanimTable.class,Long.parseLong(sale.getCustomerId()));
 		for(Product product:sale.getProductList())
 		{
-			SatisTable satisTable = new SatisTable();
-			satisTable.setSaticiKodu(new Long(sale.getUserId()));
 			UrunTanimTable urunTanimTable = productDAO.findById(UrunTanimTable.class, Integer.parseInt(product.getId()));
-			satisTable.setUrunKodu(urunTanimTable.getUrunKodu());
-			satisTable.setAdet(product.getQuantity());
-			satisTable.setSatisTarihi(new Date());
-			satisTableSeti.add(satisTable);
+			MusteriSatisTable musteriSatisTable = new MusteriSatisTable();
+			musteriSatisTable.getPk().setUrun(urunTanimTable);
+			musteriSatisTable.getPk().setMusteri(customer);
+			musteriSatisTable.setSatisTarihi(new Date());
+			musteriSatisTable.setSatisFiyati(product.getPrice());
+			musteriSatisTable.setAdet(product.getQuantity());
+			musteriSatisTable.setTutar(new BigDecimal(product.getPrice()*product.getQuantity()));
+			customer.getMusteriyeYapilanSatislar().add(musteriSatisTable);
+			urunTanimTable.getMusteriyeYapilanSatislar().add(musteriSatisTable);
+			
 		}
-		saleDAO.saticiSatisKaydet(satisTableSeti);
+		saleDAO.musteriSatisKaydet(satisTableSeti);
 	}
 	
 	public void satisiGerceklestir(SaticiTanimTable satici,Date satisTarihi) 

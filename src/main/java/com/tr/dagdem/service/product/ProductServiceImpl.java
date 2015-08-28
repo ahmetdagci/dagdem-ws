@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
 import com.tr.dagdem.dao.product.ProductDAO;
+import com.tr.dagdem.model.enums.ProductType;
 import com.tr.dagdem.model.product.UrunTanimTable;
 import com.tr.dagdem.model.stock.UrunStockRaporu;
 import com.tr.dagdem.model.stock.UrunStockTable;
@@ -27,16 +28,27 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Transactional(readOnly = true)
-	public List<Product> getProducts(String productType)
+	public List<Product> getProducts(ProductType productType)
 	{
 		List<Product> prodList = Lists.newArrayList();
-		List<UrunTanimTable> urunTanimlari = productDAO.urunleriGetir();
+		List<UrunTanimTable> urunTanimlari = productDAO.urunleriGetir(productType);
 		for(UrunTanimTable urunTanim:urunTanimlari)
 		{
 			Product product = new Product(String.valueOf(urunTanim.getUrunKodu()),urunTanim.getUrunAdi(),urunTanim.getFiyat(),urunTanim.getAdet());
 			prodList.add(product);
 		}
 		return prodList;
+	}
+	
+	@Transactional
+	public void urunEkle(Product product)
+	{
+		UrunTanimTable urunTanimTable = new UrunTanimTable();
+		urunTanimTable.setAdet(product.getQuantity());
+		urunTanimTable.setFiyat(product.getPrice());
+		urunTanimTable.setUrunAdi(product.getProductName());
+		urunTanimTable.setType(product.getProductType());
+		productDAO.saveOrUpdate(urunTanimTable);
 	}
 	
 	public void urunEkle(UrunTanimTable urun)

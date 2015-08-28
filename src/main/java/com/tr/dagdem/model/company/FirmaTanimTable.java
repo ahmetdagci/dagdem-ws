@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "FIRMA_TANIM_TABLE",catalog = "satistakip")
+@Table(name = "FIRMA_TANIM_TABLE")
 public class FirmaTanimTable implements Serializable{
 
 	private long id;

@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "SATIS_TABLE",catalog = "satistakip")
+@Table(name = "SATIS_TABLE")
 public class SatisTable {
 
 	private long id;

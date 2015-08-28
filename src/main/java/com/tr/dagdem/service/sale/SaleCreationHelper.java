@@ -50,14 +50,14 @@ public class SaleCreationHelper {
 			
 			if(urun.getAdet()>0)
 			{	
-				MusteriSatisTable musteriSatisTable = new MusteriSatisTable();
-				musteriSatisTable.setMusteriKodu(musteri.getId());
-				musteriSatisTable.setSaticiKodu(satici.getId());
-				musteriSatisTable.setUrunKodu(urun.getUrunKodu());
-				musteriSatisTable.setAdet(urun.getAdet());
-				musteriSatisTable.setTutar(new BigDecimal(urun.getTutar()));
-				musteriSatisTable.setSatisTarihi(satisTarihi);
-				musteriSatisTableSeti.add(musteriSatisTable);
+//				MusteriSatisTable musteriSatisTable = new MusteriSatisTable();
+//				musteriSatisTable.setMusteriKodu(musteri.getId());
+//				musteriSatisTable.setSaticiKodu(satici.getId());
+//				musteriSatisTable.setUrunKodu(urun.getUrunKodu());
+//				musteriSatisTable.setAdet(urun.getAdet());
+//				musteriSatisTable.setTutar(new BigDecimal(urun.getTutar()));
+//				musteriSatisTable.setSatisTarihi(satisTarihi);
+//				musteriSatisTableSeti.add(musteriSatisTable);
 			}
 		}
 		return musteriSatisTableSeti;

@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name="TAHSILAT_TABLE",catalog="satistakip")
+@Table(name="TAHSILAT_TABLE")
 public class TahsilatTable implements Serializable
 {
 	private long id;

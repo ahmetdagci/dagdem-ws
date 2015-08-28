@@ -16,6 +16,6 @@
 
  <mvc:annotation-driven />
  
- <import resource="classpath:applicationContext-ds-dev.xml" />	
+ <import resource="classpath:applicationContext-ds-prod.xml" />	
  
 </beans>

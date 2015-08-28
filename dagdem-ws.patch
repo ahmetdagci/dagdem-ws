@@ -1,0 +1,528 @@
+diff --git a/src/main/java/com/tr/dagdem/model/company/FirmaOdemeTable.java b/src/main/java/com/tr/dagdem/model/company/FirmaOdemeTable.java
+index 1608546..c02e174 100644
+--- a/src/main/java/com/tr/dagdem/model/company/FirmaOdemeTable.java
++++ b/src/main/java/com/tr/dagdem/model/company/FirmaOdemeTable.java
+@@ -18,7 +18,7 @@
+ 
+ @SuppressWarnings("serial")
+ @Entity
+-@Table(name = "FIRMA_ODEME_TABLE",catalog = "satistakip")
++@Table(name = "FIRMA_ODEME_TABLE")
+ public class FirmaOdemeTable implements Serializable{
+ 
+ 	private long id;
+diff --git a/src/main/java/com/tr/dagdem/model/company/FirmaTable.java b/src/main/java/com/tr/dagdem/model/company/FirmaTable.java
+index 5c9e3bb..595a431 100644
+--- a/src/main/java/com/tr/dagdem/model/company/FirmaTable.java
++++ b/src/main/java/com/tr/dagdem/model/company/FirmaTable.java
+@@ -19,7 +19,7 @@
+ 
+ @SuppressWarnings("serial")
+ @Entity
+-@Table(name = "FIRMA_ODEME_TABLE",catalog = "satistakip")
++@Table(name = "FIRMA_ODEME_TABLE")
+ public class FirmaTable implements Serializable{
+ 
+ 	private long id;
+diff --git a/src/main/java/com/tr/dagdem/model/company/FirmaTanimTable.java b/src/main/java/com/tr/dagdem/model/company/FirmaTanimTable.java
+index 038d412..5102509 100644
+--- a/src/main/java/com/tr/dagdem/model/company/FirmaTanimTable.java
++++ b/src/main/java/com/tr/dagdem/model/company/FirmaTanimTable.java
+@@ -20,7 +20,7 @@
+ 
+ @SuppressWarnings("serial")
+ @Entity
+-@Table(name = "FIRMA_TANIM_TABLE",catalog = "satistakip")
++@Table(name = "FIRMA_TANIM_TABLE")
+ public class FirmaTanimTable implements Serializable{
+ 
+ 	private long id;
+diff --git a/src/main/java/com/tr/dagdem/model/customer/MusteriTanimTable.java b/src/main/java/com/tr/dagdem/model/customer/MusteriTanimTable.java
+index e6bea5d..9a9fda7 100644
+--- a/src/main/java/com/tr/dagdem/model/customer/MusteriTanimTable.java
++++ b/src/main/java/com/tr/dagdem/model/customer/MusteriTanimTable.java
+@@ -2,22 +2,29 @@
+ 
+ import java.io.Serializable;
+ import java.util.Date;
++import java.util.Set;
+ 
++import javax.persistence.CascadeType;
+ import javax.persistence.Column;
+ import javax.persistence.Entity;
++import javax.persistence.FetchType;
+ import javax.persistence.Id;
++import javax.persistence.OneToMany;
+ import javax.persistence.Table;
+ import javax.persistence.Temporal;
+ import javax.persistence.TemporalType;
+ import javax.persistence.Transient;
+-
+-import org.apache.commons.lang3.StringUtils;
+ import javax.validation.constraints.Max;
+ import javax.validation.constraints.NotNull;
+ 
++import org.apache.commons.lang3.StringUtils;
++
++import com.google.common.collect.Sets;
++import com.tr.dagdem.model.sale.MusteriSatisTable;
++
+ @SuppressWarnings("serial")
+ @Entity
+-@Table(name="MUSTERI_TANIM_TABLE",catalog="satistakip")
++@Table(name="MUSTERI_TANIM_TABLE")
+ public class MusteriTanimTable implements Serializable{
+ 	
+ 	private long id;
+@@ -32,6 +39,18 @@
+ 	private boolean yeniMusteri = false;
+ 	private String musteriNo;
+ 	
++	
++	private Set<MusteriSatisTable> musteriyeYapilanSatislar = Sets.newHashSet();
++	
++	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="pk.musteri")
++	public Set<MusteriSatisTable> getMusteriyeYapilanSatislar() {
++		return musteriyeYapilanSatislar;
++	}
++
++	public void setMusteriyeYapilanSatislar(Set<MusteriSatisTable> musteriyeYapilanSatislar) {
++		this.musteriyeYapilanSatislar = musteriyeYapilanSatislar;
++	}
++
+ 	@Id
+     @Column(name = "MUSTERI_ID", unique = true, nullable = false, precision = 23, scale = 0)
+     @NotNull
+diff --git a/src/main/java/com/tr/dagdem/model/dealer/SaticiTanimTable.java b/src/main/java/com/tr/dagdem/model/dealer/SaticiTanimTable.java
+index 6bddad3..4187a88 100644
+--- a/src/main/java/com/tr/dagdem/model/dealer/SaticiTanimTable.java
++++ b/src/main/java/com/tr/dagdem/model/dealer/SaticiTanimTable.java
+@@ -27,7 +27,7 @@
+  */
+ @SuppressWarnings("serial")
+ @Entity
+-@Table(name = "SATICI_TANIM_TABLE",catalog = "satistakip")
++@Table(name = "SATICI_TANIM_TABLE")
+ public class SaticiTanimTable implements java.io.Serializable {
+ 
+ 	private long id;
+diff --git a/src/main/java/com/tr/dagdem/model/product/UrunIadeTable.java b/src/main/java/com/tr/dagdem/model/product/UrunIadeTable.java
+index 02bad72..f2904e0 100644
+--- a/src/main/java/com/tr/dagdem/model/product/UrunIadeTable.java
++++ b/src/main/java/com/tr/dagdem/model/product/UrunIadeTable.java
+@@ -17,7 +17,7 @@
+ 
+ @SuppressWarnings("serial")
+ @Entity
+-@Table(name="URUN_IADE_TABLE",catalog="satistakip")
++@Table(name="URUN_IADE_TABLE")
+ public class UrunIadeTable implements Serializable{
+ 	
+ 	private long id;
+diff --git a/src/main/java/com/tr/dagdem/model/product/UrunTanimTable.java b/src/main/java/com/tr/dagdem/model/product/UrunTanimTable.java
+index 1848a76..b46c3c9 100644
+--- a/src/main/java/com/tr/dagdem/model/product/UrunTanimTable.java
++++ b/src/main/java/com/tr/dagdem/model/product/UrunTanimTable.java
+@@ -3,23 +3,30 @@
+ 
+ import java.math.BigDecimal;
+ import java.util.List;
++import java.util.Set;
+ 
++import javax.persistence.CascadeType;
+ import javax.persistence.Column;
+ import javax.persistence.Entity;
++import javax.persistence.FetchType;
+ import javax.persistence.GeneratedValue;
+ import javax.persistence.GenerationType;
+ import javax.persistence.Id;
++import javax.persistence.OneToMany;
+ import javax.persistence.Table;
+ import javax.persistence.Transient;
+ 
+ import javax.validation.constraints.Max;
++
++import com.google.common.collect.Sets;
++import com.tr.dagdem.model.sale.MusteriSatisTable;
+ 
+ /**
+  * UrunTanimTable generated by hbm2java
+  */
+ @SuppressWarnings("serial")
+ @Entity
+-@Table(name = "urun_tanim_table", catalog = "satistakip")
++@Table(name = "urun_tanim_table")
+ public class UrunTanimTable implements java.io.Serializable {
+ 
+ 	private int urunKodu;
+@@ -33,6 +40,18 @@
+ 	//Transient variables
+ 	private int adet = 1;
+ 	private boolean sepeteEklendi = false;
++	
++	
++	private Set<MusteriSatisTable> musteriyeYapilanSatislar = Sets.newHashSet();
++
++	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="pk.urun")
++	public Set<MusteriSatisTable> getMusteriyeYapilanSatislar() {
++		return musteriyeYapilanSatislar;
++	}
++
++	public void setMusteriyeYapilanSatislar(Set<MusteriSatisTable> musteriyeYapilanSatislar) {
++		this.musteriyeYapilanSatislar = musteriyeYapilanSatislar;
++	}
+ 
+ 	public UrunTanimTable() {
+ 	}
+diff --git a/src/main/java/com/tr/dagdem/model/revenue/TahsilatTable.java b/src/main/java/com/tr/dagdem/model/revenue/TahsilatTable.java
+index 3bc29b1..a0af260 100644
+--- a/src/main/java/com/tr/dagdem/model/revenue/TahsilatTable.java
++++ b/src/main/java/com/tr/dagdem/model/revenue/TahsilatTable.java
+@@ -18,7 +18,7 @@
+ 
+ @SuppressWarnings("serial")
+ @Entity
+-@Table(name="TAHSILAT_TABLE",catalog="satistakip")
++@Table(name="TAHSILAT_TABLE")
+ public class TahsilatTable implements Serializable
+ {
+ 	private long id;
+diff --git a/src/main/java/com/tr/dagdem/model/sale/MusteriSatisTable.java b/src/main/java/com/tr/dagdem/model/sale/MusteriSatisTable.java
+index ccbc047..9fa661c 100644
+--- a/src/main/java/com/tr/dagdem/model/sale/MusteriSatisTable.java
++++ b/src/main/java/com/tr/dagdem/model/sale/MusteriSatisTable.java
+@@ -4,20 +4,25 @@
+ import java.math.BigDecimal;
+ import java.util.Date;
+ 
++import javax.persistence.AssociationOverride;
++import javax.persistence.AssociationOverrides;
+ import javax.persistence.Column;
++import javax.persistence.EmbeddedId;
+ import javax.persistence.Entity;
+-import javax.persistence.GeneratedValue;
+-import javax.persistence.GenerationType;
+-import javax.persistence.Id;
++import javax.persistence.JoinColumn;
+ import javax.persistence.Table;
+ import javax.persistence.Temporal;
+ import javax.persistence.TemporalType;
+ 
+-import javax.validation.constraints.NotNull;
+ 
+-@SuppressWarnings("serial")
++
+ @Entity
+-@Table(name = "MUSTERI_SATIS_TABLE",catalog = "satistakip")
++@Table(name = "MUSTERI_SATIS_TABLE")
++@AssociationOverrides({
++		@AssociationOverride(name = "pk.urun", 
++			joinColumns = @JoinColumn(name = "URUN_KODU")),
++		@AssociationOverride(name = "pk.musteri", 
++			joinColumns = @JoinColumn(name = "MUSTERI_ID")) })
+ public class MusteriSatisTable implements Serializable{
+ 
+ 	private long id;
+@@ -30,19 +35,17 @@
+ 	private BigDecimal tutar;
+ 	private boolean etkin = true;
+ 	
+-	@Id
+-    @Column(name = "SATIS_ID", unique = true, nullable = false, precision = 23, scale = 0)
+-    @NotNull
+-    @GeneratedValue(strategy = GenerationType.AUTO)
+-    public Long getId()
+-    {
+-        return this.id;
+-    }
++	MusteriSatisTableId pk = new MusteriSatisTableId();
++	
++	
++	@EmbeddedId
++	public MusteriSatisTableId getPk() {
++		return pk;
++	}
+ 
+-    public void setId(Long id)
+-    {
+-        this.id = id;
+-    }
++	public void setPk(MusteriSatisTableId pk) {
++		this.pk = pk;
++	}
+     
+     @Column(name = "SATICI_KODU", precision = 23, scale = 0)
+     public long getSaticiKodu() {
+@@ -51,24 +54,6 @@
+     
+     public void setSaticiKodu(long saticiKodu) {
+ 		this.saticiKodu = saticiKodu;
+-	}
+-    
+-    @Column(name = "MUSTERI_KODU", precision = 23, scale = 0)
+-    public long getMusteriKodu() {
+-		return musteriKodu;
+-	}
+-    
+-    public void setMusteriKodu(long musteriKodu) {
+-		this.musteriKodu = musteriKodu;
+-	}
+-    
+-    @Column(name = "URUN_KODU", precision = 23, scale = 0)
+-    public long getUrunKodu() {
+-		return urunKodu;
+-	}
+-    
+-    public void setUrunKodu(long urunKodu) {
+-		this.urunKodu = urunKodu;
+ 	}
+     
+     @Column(name = "ADET", precision = 10, scale = 0)
+@@ -117,4 +102,23 @@
+ 		this.satisTarihi = satisTarihi;
+ 	}
+     
++	public boolean equals(Object o) {
++		if (this == o)
++			return true;
++		if (o == null || getClass() != o.getClass())
++			return false;
++
++		MusteriSatisTable that = (MusteriSatisTable) o;
++
++		if (getPk() != null ? !getPk().equals(that.getPk())
++				: that.getPk() != null)
++			return false;
++
++		return true;
++	}
++
++	public int hashCode() {
++		return (getPk() != null ? getPk().hashCode() : 0);
++	} 
++    
+ }
+diff --git a/src/main/java/com/tr/dagdem/model/sale/MusteriSatisTableId.java b/src/main/java/com/tr/dagdem/model/sale/MusteriSatisTableId.java
+new file mode 100644
+index 0000000..7f8755b
+--- /dev/null
++++ b/src/main/java/com/tr/dagdem/model/sale/MusteriSatisTableId.java
+@@ -0,0 +1,54 @@
++package com.tr.dagdem.model.sale;
++
++import javax.persistence.CascadeType;
++import javax.persistence.Embeddable;
++import javax.persistence.ManyToOne;
++
++import com.tr.dagdem.model.customer.MusteriTanimTable;
++import com.tr.dagdem.model.product.UrunTanimTable;
++
++@Embeddable
++public class MusteriSatisTableId implements java.io.Serializable {
++	
++	@ManyToOne(cascade=CascadeType.ALL)
++	private MusteriTanimTable musteri;
++	
++	@ManyToOne(cascade=CascadeType.ALL)
++	private UrunTanimTable urun;
++
++	public MusteriTanimTable getMusteri() {
++		return musteri;
++	}
++
++	public void setMusteri(MusteriTanimTable musteri) {
++		this.musteri = musteri;
++	}
++
++	public UrunTanimTable getUrun() {
++		return urun;
++	}
++
++	public void setUrun(UrunTanimTable urun) {
++		this.urun = urun;
++	}
++	
++	public boolean equals(Object o) {
++        if (this == o) return true;
++        if (o == null || getClass() != o.getClass()) return false;
++
++        MusteriSatisTableId that = (MusteriSatisTableId) o;
++
++        if (musteri != null ? !musteri.equals(that.musteri) : that.musteri != null) return false;
++        if (urun != null ? !urun.equals(that.urun) : that.urun != null)
++            return false;
++
++        return true;
++    }
++
++    public int hashCode() {
++        int result;
++        result = (musteri != null ? musteri.hashCode() : 0);
++        result = 31 * result + (urun != null ? urun.hashCode() : 0);
++        return result;
++    }
++}
+\ No newline at end of file
+diff --git a/src/main/java/com/tr/dagdem/model/sale/SatisTable.java b/src/main/java/com/tr/dagdem/model/sale/SatisTable.java
+index f8e5fee..e90fdad 100644
+--- a/src/main/java/com/tr/dagdem/model/sale/SatisTable.java
++++ b/src/main/java/com/tr/dagdem/model/sale/SatisTable.java
+@@ -14,7 +14,7 @@
+ import javax.validation.constraints.NotNull;
+ 
+ @Entity
+-@Table(name = "SATIS_TABLE",catalog = "satistakip")
++@Table(name = "SATIS_TABLE")
+ public class SatisTable {
+ 
+ 	private long id;
+diff --git a/src/main/java/com/tr/dagdem/model/stock/UrunStockTable.java b/src/main/java/com/tr/dagdem/model/stock/UrunStockTable.java
+index 3a6cb59..8742f7e 100644
+--- a/src/main/java/com/tr/dagdem/model/stock/UrunStockTable.java
++++ b/src/main/java/com/tr/dagdem/model/stock/UrunStockTable.java
+@@ -18,7 +18,7 @@
+ 
+ @SuppressWarnings("serial")
+ @Entity
+-@Table(name = "URUN_STOCK_TABLE",catalog = "satistakip")
++@Table(name = "URUN_STOCK_TABLE")
+ public class UrunStockTable implements Serializable {
+ 
+ 	private long id;
+diff --git a/src/main/java/com/tr/dagdem/model/user/KullaniciTable.java b/src/main/java/com/tr/dagdem/model/user/KullaniciTable.java
+index a79c970..3b25873 100644
+--- a/src/main/java/com/tr/dagdem/model/user/KullaniciTable.java
++++ b/src/main/java/com/tr/dagdem/model/user/KullaniciTable.java
+@@ -21,7 +21,7 @@
+  */
+ @SuppressWarnings("serial")
+ @Entity
+-@Table(name = "KULLANICI_TABLE",catalog = "satistakip")
++@Table(name = "KULLANICI_TABLE")
+ public class KullaniciTable implements java.io.Serializable {
+ 
+ 	private long id;
+diff --git a/src/main/java/com/tr/dagdem/service/sale/SaleCreationHelper.java b/src/main/java/com/tr/dagdem/service/sale/SaleCreationHelper.java
+index 90e7dff..b47ddb5 100644
+--- a/src/main/java/com/tr/dagdem/service/sale/SaleCreationHelper.java
++++ b/src/main/java/com/tr/dagdem/service/sale/SaleCreationHelper.java
+@@ -50,14 +50,14 @@
+ 			
+ 			if(urun.getAdet()>0)
+ 			{	
+-				MusteriSatisTable musteriSatisTable = new MusteriSatisTable();
+-				musteriSatisTable.setMusteriKodu(musteri.getId());
+-				musteriSatisTable.setSaticiKodu(satici.getId());
+-				musteriSatisTable.setUrunKodu(urun.getUrunKodu());
+-				musteriSatisTable.setAdet(urun.getAdet());
+-				musteriSatisTable.setTutar(new BigDecimal(urun.getTutar()));
+-				musteriSatisTable.setSatisTarihi(satisTarihi);
+-				musteriSatisTableSeti.add(musteriSatisTable);
++//				MusteriSatisTable musteriSatisTable = new MusteriSatisTable();
++//				musteriSatisTable.setMusteriKodu(musteri.getId());
++//				musteriSatisTable.setSaticiKodu(satici.getId());
++//				musteriSatisTable.setUrunKodu(urun.getUrunKodu());
++//				musteriSatisTable.setAdet(urun.getAdet());
++//				musteriSatisTable.setTutar(new BigDecimal(urun.getTutar()));
++//				musteriSatisTable.setSatisTarihi(satisTarihi);
++//				musteriSatisTableSeti.add(musteriSatisTable);
+ 			}
+ 		}
+ 		return musteriSatisTableSeti;
+diff --git a/src/main/java/com/tr/dagdem/util/ModelDBBuilder.java b/src/main/java/com/tr/dagdem/util/ModelDBBuilder.java
+index 84a1f44..37a7469 100644
+--- a/src/main/java/com/tr/dagdem/util/ModelDBBuilder.java
++++ b/src/main/java/com/tr/dagdem/util/ModelDBBuilder.java
+@@ -14,19 +14,8 @@
+     public static void main(String[] args) throws Exception
+     {
+         
+-       // ApplicationContext applicationContext = new ClassPathXmlApplicationContext(new String[] {"applicationContext-ds-dev.xml"});
+-	   
+-	    try {
+-//            readData();
+-            Connection h2Connection = getH2Connection();
+-            System.out.println(h2Connection.toString());
+-
+-        } catch (SQLException e) {
+-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+-        } catch (ClassNotFoundException e) {
+-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+-        }
+-        
++        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(new String[] {"applicationContext-ds-prod.xml"});
++        System.out.println("sadasdas");
+     }
+ 	
+ 	public static Connection getH2Connection() throws SQLException,ClassNotFoundException {
+diff --git a/src/main/resources/applicationContext-ds-prod.xml b/src/main/resources/applicationContext-ds-prod.xml
+new file mode 100644
+index 0000000..4d0893c
+--- /dev/null
++++ b/src/main/resources/applicationContext-ds-prod.xml
+@@ -0,0 +1,64 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<beans xmlns="http://www.springframework.org/schema/beans"
++        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++        xmlns:context="http://www.springframework.org/schema/context"
++        xmlns:tx="http://www.springframework.org/schema/tx"
++        xmlns:aop="http://www.springframework.org/schema/aop"
++        xsi:schemaLocation="http://www.springframework.org/schema/beans 
++        			http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
++                            http://www.springframework.org/schema/context 
++                            http://www.springframework.org/schema/context/spring-context-4.0.xsd
++                            http://www.springframework.org/schema/aop 
++                            http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
++                            http://www.springframework.org/schema/tx  
++                            http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
++ 
++ 	<tx:annotation-driven transaction-manager="transactionManager"/>
++    
++    <context:component-scan base-package="com.tr.dagdem" />
++	
++	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
++		<property name="sessionFactory" ref="sessionFactory" />
++	</bean>
++	 	
++	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
++		<property name="dataSource" ref="dataSource" />
++		<property name="packagesToScan" value="com.tr.dagdem.model" /> 
++		<property name="configLocations">
++			<list>
++				<value>classpath:hibernate.cfg.xml</value>
++			</list>
++    	</property>
++		<property name="hibernateProperties">
++			<props>
++				<prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
++				<prop key="hibernate.show_sql">true</prop>
++				<prop key="hibernate.hbm2ddl.auto">create</prop>
++				<!-- <prop key="hibernate.transaction.flush_before_completion">
++  					true
++  				</prop> -->
++				<!-- <prop key="hibernate.default_schema">satistakip_temp</prop> -->
++				<prop key="hibernate.transaction.flush_before_completion">true</prop>
++                <prop key="hibernate.connection.release_mode">after_transaction</prop>
++				
++				<prop key="hibernate.generate_statistics">true</prop>
++  				<prop key="hibernate.connection.SetBigStringTryClob">true</prop>
++  				<prop key="hibernate.jdbc.batch_size">0</prop>
++			</props>
++		</property>
++	</bean>	
++		
++	 <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
++		<property name="driverClassName" value="org.h2.Driver" />
++		<property name="url" value="jdbc:h2:tcp://localhost/~/satistakip_temp;MODE=MySQL" />
++		<property name="username" value="sa" />
++		<property name="password" value="" />
++		<property name="initialSize" value="1"/>
++        <property name="maxTotal" value="100"/>
++        <property name="maxWaitMillis" value="10000"/>
++        <property name="defaultAutoCommit" value="false"/>
++        <property name="accessToUnderlyingConnectionAllowed" value="true"/>		
++	</bean>
++	
++	
++</beans>
+\ No newline at end of file

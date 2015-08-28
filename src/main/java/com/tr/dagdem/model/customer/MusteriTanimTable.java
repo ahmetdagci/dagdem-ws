@@ -2,22 +2,31 @@ package com.tr.dagdem.model.customer;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.StringUtils;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
+
+import com.google.common.collect.Sets;
+import com.tr.dagdem.model.sale.MusteriSatisTable;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name="MUSTERI_TANIM_TABLE",catalog="satistakip")
+@Table(name="MUSTERI_TANIM_TABLE")
 public class MusteriTanimTable implements Serializable{
 	
 	private long id;
@@ -32,9 +41,22 @@ public class MusteriTanimTable implements Serializable{
 	private boolean yeniMusteri = false;
 	private String musteriNo;
 	
+	
+	private Set<MusteriSatisTable> musteriyeYapilanSatislar = Sets.newHashSet();
+	
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="pk.musteri")
+	public Set<MusteriSatisTable> getMusteriyeYapilanSatislar() {
+		return musteriyeYapilanSatislar;
+	}
+
+	public void setMusteriyeYapilanSatislar(Set<MusteriSatisTable> musteriyeYapilanSatislar) {
+		this.musteriyeYapilanSatislar = musteriyeYapilanSatislar;
+	}
+
 	@Id
     @Column(name = "MUSTERI_ID", unique = true, nullable = false, precision = 23, scale = 0)
-    @NotNull
+	@NotNull
+	@GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId()
     {
         return this.id;
@@ -46,7 +68,7 @@ public class MusteriTanimTable implements Serializable{
     }
     
 	@Column(name = "MUSTERI_ADI", length = 100)
-	@Max(100)
+	@Length(max=100)
 	public String getMusteriAdi() {
 		return this.musteriAdi;
 	}
@@ -56,7 +78,7 @@ public class MusteriTanimTable implements Serializable{
 	}
 	
     @Column(name = "MUSTERI_SOYADI", length = 100)
-    @Max(100)
+    @Length(max=100)
     public String getMusteriSoyadi()
     {
         return this.musteriSoyadi;
@@ -68,7 +90,7 @@ public class MusteriTanimTable implements Serializable{
     }
 
 	@Column(name = "EMAIL", length = 50)
-	@Max(50)
+	@Length(max=50)
 	public String getEmail() {
 		return this.email;
 	}
@@ -116,7 +138,7 @@ public class MusteriTanimTable implements Serializable{
 	}
 	
 	@Column(name = "MUSTERI_ADRES", length = 250)
-	@Max(250)
+	@Length(max=250)
 	public String getMusteriAdres() {
 		return musteriAdres;
 	}

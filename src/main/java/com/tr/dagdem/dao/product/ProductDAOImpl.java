@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.tr.dagdem.dao.GenericDAOImpl;
+import com.tr.dagdem.model.enums.ProductType;
 import com.tr.dagdem.model.product.UrunTanimTable;
 import com.tr.dagdem.model.stock.UrunStockRaporu;
 
@@ -19,6 +20,14 @@ public class ProductDAOImpl extends GenericDAOImpl implements ProductDAO {
 	public List<UrunTanimTable> urunleriGetir()
 	{
 		return (List<UrunTanimTable>)this.getSession().createQuery("from UrunTanimTable order by type asc ").list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<UrunTanimTable> urunleriGetir(ProductType productType)
+	{
+		return (List<UrunTanimTable>)this.getSession().createQuery("from UrunTanimTable urun where urun.type=:productType order by urun.urunAdi asc ")
+				.setParameter("productType", productType)
+				.list();
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -4,71 +4,40 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.AssociationOverride;
+import javax.persistence.AssociationOverrides;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import javax.validation.constraints.NotNull;
 
-@SuppressWarnings("serial")
+
 @Entity
-@Table(name = "MUSTERI_SATIS_TABLE",catalog = "satistakip")
+@Table(name = "MUSTERI_SATIS_TABLE")
+@AssociationOverrides({
+		@AssociationOverride(name = "pk.urun",joinColumns = @JoinColumn(name = "URUN_KODU")),
+		@AssociationOverride(name = "pk.musteri",joinColumns = @JoinColumn(name = "MUSTERI_ID"))})
 public class MusteriSatisTable implements Serializable{
 
-	private long id;
-	private long saticiKodu;
-	private long musteriKodu;
-	private long urunKodu;
 	private long adet;
 	private double satisFiyati;
 	private Date satisTarihi;
 	private BigDecimal tutar;
 	private boolean etkin = true;
 	
-	@Id
-    @Column(name = "SATIS_ID", unique = true, nullable = false, precision = 23, scale = 0)
-    @NotNull
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long getId()
-    {
-        return this.id;
-    }
+	@EmbeddedId
+	private MusteriSatisTableId pk = new MusteriSatisTableId();
+	
+	public MusteriSatisTableId getPk() {
+		return pk;
+	}
 
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
-    
-    @Column(name = "SATICI_KODU", precision = 23, scale = 0)
-    public long getSaticiKodu() {
-		return saticiKodu;
-	}
-    
-    public void setSaticiKodu(long saticiKodu) {
-		this.saticiKodu = saticiKodu;
-	}
-    
-    @Column(name = "MUSTERI_KODU", precision = 23, scale = 0)
-    public long getMusteriKodu() {
-		return musteriKodu;
-	}
-    
-    public void setMusteriKodu(long musteriKodu) {
-		this.musteriKodu = musteriKodu;
-	}
-    
-    @Column(name = "URUN_KODU", precision = 23, scale = 0)
-    public long getUrunKodu() {
-		return urunKodu;
-	}
-    
-    public void setUrunKodu(long urunKodu) {
-		this.urunKodu = urunKodu;
+	public void setPk(MusteriSatisTableId pk) {
+		this.pk = pk;
 	}
     
     @Column(name = "ADET", precision = 10, scale = 0)
@@ -116,5 +85,24 @@ public class MusteriSatisTable implements Serializable{
     public void setSatisTarihi(Date satisTarihi) {
 		this.satisTarihi = satisTarihi;
 	}
+    
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+
+		MusteriSatisTable that = (MusteriSatisTable) o;
+
+		if (getPk() != null ? !getPk().equals(that.getPk())
+				: that.getPk() != null)
+			return false;
+
+		return true;
+	}
+
+	public int hashCode() {
+		return (getPk() != null ? getPk().hashCode() : 0);
+	} 
     
 }

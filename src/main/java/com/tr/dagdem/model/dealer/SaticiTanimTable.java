@@ -27,7 +27,7 @@ import com.tr.dagdem.model.product.UrunTanimTable;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "SATICI_TANIM_TABLE",catalog = "satistakip")
+@Table(name = "SATICI_TANIM_TABLE")
 public class SaticiTanimTable implements java.io.Serializable {
 
 	private long id;

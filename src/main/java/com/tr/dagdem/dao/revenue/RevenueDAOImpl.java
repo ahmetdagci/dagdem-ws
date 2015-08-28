@@ -24,7 +24,7 @@ public class RevenueDAOImpl extends GenericDAOImpl implements RevenueDAO{
 
 	public BigDecimal musteriyeYapilanSatisSorgula(long musteriId)
 	{
-		BigDecimal toplamBorcTutari = (BigDecimal)getSession().createQuery("select sum(tutar) from MusteriSatisTable musteriSatis where musteriSatis.etkin=true and musteriSatis.musteriKodu=:musteriId")
+		BigDecimal toplamBorcTutari = (BigDecimal)getSession().createQuery("select sum(tutar) from MusteriSatisTable musteriSatis where musteriSatis.etkin=true and musteriSatis.pk.musteri.id=:musteriId")
 		.setParameter("musteriId", musteriId)
 		.uniqueResult();
 		if(toplamBorcTutari==null)

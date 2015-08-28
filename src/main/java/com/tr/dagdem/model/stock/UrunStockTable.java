@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "URUN_STOCK_TABLE",catalog = "satistakip")
+@Table(name = "URUN_STOCK_TABLE")
 public class UrunStockTable implements Serializable {
 
 	private long id;

@@ -48,6 +48,7 @@ public class RevenueServiceImpl extends BaseServisImpl implements RevenueService
 		return revenueDAO.tumMusterilerdenYapilanTahsilatTutariSorgula();
 	}
 	
+	@Transactional
 	public BigDecimal musteridenYapilanTahsilatTutariSorgula(long customerId)
 	{
 		return revenueDAO.musteridenYapilanTahsilatTutariSorgula(customerId);	
