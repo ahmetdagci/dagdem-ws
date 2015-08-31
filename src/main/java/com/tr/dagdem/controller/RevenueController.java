@@ -47,14 +47,14 @@ public class RevenueController {
 		return revenueService.musteriBorcuSorgula(new Long(customerId));
 	}
 	
-	@RequestMapping(value="/queryIncomeFromCustomer/{customerId}")
-	public BigDecimal queryIncomeFromCustomer(@PathVariable("customerId") String customerId)
+	@RequestMapping(value="/queryRevenueFromCustomer")
+	public BigDecimal queryRevenueFromCustomer(@RequestParam("customerId") String customerId)
 	{
 		return revenueService.musteridenYapilanTahsilatTutariSorgula(new Long(customerId));
 	}
 	
-	@RequestMapping("/queryIncomeFromAllCustomers")
-	public BigDecimal queryIncomeFromAllCustomers()
+	@RequestMapping("/queryRevenueFromAllCustomers")
+	public BigDecimal queryRevenueFromAllCustomers()
 	{
 		return revenueService.tumMusterilereYapilanSatisTutari();
 	}

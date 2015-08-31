@@ -12,10 +12,6 @@ public interface SaleService {
 
 	public void satisiGerceklestir(Sale sale);
 	
-	public void satisiGerceklestir(SaticiTanimTable satici,Date satisTarihi);
-	
-	public void satisiGerceklestir(SaticiTanimTable satici,MusteriTanimTable musteri,Date satisTarihi);
-	
 	public void iadeyiGerceklestir(SaticiTanimTable satici,MusteriTanimTable musteri,Date iadeTarihi);
 	
 	public List<SatisIptalModel> silinebilecekUrunleriGetir(Date baslamaTarihi,Date bitisTarihi);

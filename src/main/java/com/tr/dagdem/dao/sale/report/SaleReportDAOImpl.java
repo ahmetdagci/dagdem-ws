@@ -93,14 +93,11 @@ public class SaleReportDAOImpl extends GenericDAOImpl implements SaleReportDAO{
 		" from musteri_tanim_table musteri,urun_tanim_table u, (select	st.musteri_kodu, st.urun_kodu,sum(st.adet) adet,sum(st.tutar) toplamTutar"+
 		" from musteri_satis_table st where st.etkin=:etkin and st.musteri_kodu=:musteriKodu group by musteri_kodu,urun_kodu) a"+ 
 		" where	a.musteri_kodu=musteri.musteri_id and a.urun_kodu = u.urun_kodu";
-	return (List<MusteriSatisRaporu>)getSession().createSQLQuery(query)
-		.addScalar("musteriAdi")
-		.addScalar("urunAdi")
-		.addScalar("adet")
-		.addScalar("toplamSatisTutari")
+		
+		String q = "select musteriSatis.pk.musteri.musteriAdi as musteriAdi ,musteriSatis.pk.urun.urunAdi as urunAdi ,musteriSatis.adet as adet from MusteriSatisTable musteriSatis where musteriSatis.etkin = true and musteriSatis.pk.musteri.id=:musteriId";
+	return (List<MusteriSatisRaporu>)getSession().createQuery(q)
 		.setResultTransformer(Transformers.aliasToBean(MusteriSatisRaporu.class))
-		.setParameter("musteriKodu", musteriNo)
-		.setParameter("etkin", true)
+		.setParameter("musteriId", musteriNo)
 		.list();
 	}
 

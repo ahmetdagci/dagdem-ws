@@ -14,7 +14,7 @@ public class RevenueControllerTest {
 
 	public static void main(String args[])
 	{
-		callQueryIncomeFromCustomer();
+		queryRevenueFromCustomer();
 	}
 	
 	public static void callQueryIncomeFromCustomer()
@@ -27,7 +27,15 @@ public class RevenueControllerTest {
         System.out.println("callQueryIncomeFromCustomer - postForEntity.getBody()"+forObject);
 	}
 	
-	public static void callqueryCustomerLoan()
+	public static void queryRevenueFromCustomer()
+	{
+		RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+        BigDecimal forObject = restTemplate.getForObject("http://localhost:3131/dagdem-ws/queryRevenueFromCustomer?customerId=1",  BigDecimal.class);
+        System.out.println("queryRevenueFromCustomer :"+forObject);
+	}
+	
+	public static void callQueryCustomerLoan()
 	{
 		RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());

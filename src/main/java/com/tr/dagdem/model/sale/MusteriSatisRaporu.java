@@ -20,6 +20,13 @@ public class MusteriSatisRaporu implements Serializable {
 		
 	}
 	
+	public MusteriSatisRaporu(String musteriAdi,String urunAdi,long adet)
+	{
+		this.musteriAdi = musteriAdi;
+		this.urunAdi = urunAdi;
+		this.adet = adet;
+	}
+	
 	public MusteriSatisRaporu(String musteriAdi,String urunAdi,long adet,BigDecimal toplamSatisTutari)
 	{
 		this.musteriAdi = musteriAdi;

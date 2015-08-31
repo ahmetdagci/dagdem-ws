@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tr.dagdem.dao.GenericDAO;
 import com.tr.dagdem.dao.sale.report.SaleReportDAO;
@@ -50,6 +51,7 @@ public class SaleReportServiceImpl extends BaseServisImpl implements SaleReportS
 		return saleReportDAO.musteriyeYapilanSatislariGetir(musteriId, baslamaTarihi, bitisTarihi);
 	}
 	
+	@Transactional
 	public List<MusteriSatisRaporu> musteriyeYapilanTumSatislariGetir(long musteriId)
 	{
 		return saleReportDAO.musteriyeYapilanSatislariGetir(musteriId); 

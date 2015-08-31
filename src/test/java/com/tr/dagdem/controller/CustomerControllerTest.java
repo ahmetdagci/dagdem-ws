@@ -22,10 +22,38 @@ public class CustomerControllerTest {
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
         Customer customer = new Customer();
-        customer.setName("Mehmet");
-        customer.setLastName("Alkan");
+        customer.setName("Harun");
+        customer.setLastName("Sakaroglu");
         customer.setGsmNo("5322721143");
         restTemplate.postForEntity("http://localhost:3131/dagdem-ws/createCustomer",customer,Void.class);
+        
+        customer = new Customer();
+        customer.setName("Osman");
+        customer.setLastName("Kurt");
+        customer.setGsmNo("5322721143");
+        restTemplate.postForEntity("http://localhost:3131/dagdem-ws/createCustomer",customer,Void.class);
+        
+        customer = new Customer();
+        customer.setName("Tülay");
+        customer.setLastName("Dağcı");
+        customer.setGsmNo("5322721143");
+        restTemplate.postForEntity("http://localhost:3131/dagdem-ws/createCustomer",customer,Void.class);
+        
+        customer = new Customer();
+        customer.setName("Keriman");
+        customer.setLastName("Dadaloğlu");
+        customer.setGsmNo("5322721143");
+        restTemplate.postForEntity("http://localhost:3131/dagdem-ws/createCustomer",customer,Void.class);
+        
+        
+        customer = new Customer();
+        customer.setName("Sezen");
+        customer.setLastName("Bahçeli");
+        customer.setGsmNo("5322721143");
+        restTemplate.postForEntity("http://localhost:3131/dagdem-ws/createCustomer",customer,Void.class);
+        
+        
+        
 	}
 
 }
